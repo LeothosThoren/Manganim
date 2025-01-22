@@ -33,7 +33,7 @@ internal class DetailViewModel @Inject constructor(
     private val getAnimeEpisodesUseCase: GetAnimeEpisodeUseCase
 ) : ViewModel() {
 
-    private val episode = handle.toRoute<ManganimuGraph.AnimeGraph.Episodes>()
+    private val episode = handle.toRoute<ManganimuGraph.AnimeGraph.AnimeInfo>()
 
     private val _uiState = MutableStateFlow<AnimeDetailUiState>(buildDefaultUiState())
     val uiState: StateFlow<AnimeDetailUiState> = _uiState.asStateFlow()
