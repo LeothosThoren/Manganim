@@ -10,8 +10,10 @@ sealed interface ManganimuGraph {
         data object Dashboard : AnimeGraph()
 
         @Serializable
-        data class Episodes(val id: Int) : AnimeGraph()
         data class AnimeInfo(val id: Int) : AnimeGraph()
+
+        @Serializable
+        data class AnimeEpisodesPlayer(val animeId: String, val episodeId: String) : AnimeGraph()
     }
 
     @Serializable
