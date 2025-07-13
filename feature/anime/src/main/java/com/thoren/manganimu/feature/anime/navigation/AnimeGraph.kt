@@ -7,7 +7,6 @@ import androidx.navigation.toRoute
 import com.thoren.manganimu.core.navigation.ManganimuGraph
 import com.thoren.manganimu.feature.anime.dashboard.screens.DashboardRoute
 import com.thoren.manganimu.feature.anime.detail.screens.AnimeInfoRoute
-import com.thoren.manganimu.feature.anime.episodeplayer.screens.EpisodePlayerRoute
 
 /** Anime Graph **/
 fun NavGraphBuilder.animeScreen(navController: NavController) {
@@ -27,6 +26,5 @@ fun NavGraphBuilder.animeScreen(navController: NavController) {
     composable<ManganimuGraph.AnimeGraph.AnimeEpisodesPlayer> { entry ->
         val animeId = entry.toRoute<ManganimuGraph.AnimeGraph.AnimeEpisodesPlayer>().animeId
         val episodeId = entry.toRoute<ManganimuGraph.AnimeGraph.AnimeEpisodesPlayer>().episodeId
-        EpisodePlayerRoute(animeId, episodeId)
     }
 }
