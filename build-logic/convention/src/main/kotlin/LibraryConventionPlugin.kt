@@ -20,7 +20,7 @@ class LibraryConventionPlugin : Plugin<Project> {
 
             extensions.configure<LibraryExtension> {
                 configureAndroid(this)
-                defaultConfig.targetSdk = 35
+                defaultConfig.targetSdk = SdkVersions.TARGET_SDK
                 defaultConfig.testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
                 testOptions.animationsDisabled = true
                 // The resource prefix is derived from the module name, so resources inside ":core:module1" must be prefixed with "core_module1_"

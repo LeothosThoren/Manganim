@@ -17,7 +17,7 @@ class TestConventionPlugin : Plugin<Project> {
 
             extensions.configure<BaseAppModuleExtension> {
                 configureAndroid(this)
-                defaultConfig.targetSdk = 35
+                defaultConfig.targetSdk = SdkVersions.TARGET_SDK
             }
 
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
