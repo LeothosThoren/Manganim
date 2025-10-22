@@ -35,11 +35,11 @@ internal class DetailViewModel @Inject constructor(
 
     private val episode = handle.toRoute<ManganimuGraph.AnimeGraph.AnimeInfo>()
 
-    private val _uiState = MutableStateFlow<AnimeDetailUiState>(buildDefaultUiState())
+    private val _uiState = MutableStateFlow(buildDefaultUiState())
     val uiState: StateFlow<AnimeDetailUiState> = _uiState.asStateFlow()
 
     init {
-        loadScreen()
+        //loadScreen()
     }
 
     private fun loadScreen() {
