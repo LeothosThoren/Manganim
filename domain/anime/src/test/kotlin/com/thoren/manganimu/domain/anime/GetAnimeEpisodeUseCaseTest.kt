@@ -1,6 +1,7 @@
 package com.thoren.manganimu.domain.anime
 
 import com.thoren.manganimu.common.ResultOf
+import com.thoren.manganimu.core.models.AnimeFailure
 import com.thoren.manganimu.domain.anime.repositories.EpisodeRepository
 import com.thoren.manganimu.domain.anime.usecases.GetAnimeEpisodeUseCaseImpl
 import kotlinx.coroutines.test.runTest
@@ -26,7 +27,7 @@ class GetAnimeEpisodeUseCaseTest {
     fun `when execute GetAnimeEpisodeUseCase should return error`() = runTest {
         // Given
         val repository = EpisodeRepository {
-            ResultOf.Failure(Throwable())
+            ResultOf.Failure(AnimeFailure.Technical)
         }
         // When
         val result = getAnimeEpisodeUseCase(repository).invoke("1")

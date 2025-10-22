@@ -4,6 +4,7 @@ import android.util.Log
 import com.thoren.manganimu.core.network.models.anime.AnimeDetailResponse
 import com.thoren.manganimu.core.network.models.anime.AnimeEpisodeResponse
 import com.thoren.manganimu.core.network.models.anime.PopularAnimeResponse
+import com.thoren.manganimu.core.network.models.anime.recommendations.AnimeRecommendationsResponse
 import com.thoren.manganimu.core.network.models.anime.stream.VideoStreamResponse
 import com.thoren.manganimu.core.network.networkdatasources.AnimeNetworkDataSource
 import com.thoren.manganimu.core.network.services.AnimeApiService
@@ -39,6 +40,12 @@ internal class RetrofitAnimeNetworkImpl @Inject constructor(
     override suspend fun getAnimeDetails(id: String): AnimeDetailResponse {
         val response = animeApiService.getAnimeDetails(id)
         Log.d("LOGGER_RetrofitAnimeNetworkImpl", "getAnimeDetails: $response")
+        return response
+    }
+
+    override suspend fun getRecentAnimeRecommendations(): AnimeRecommendationsResponse {
+        val response = animeApiService.getRecentAnimeRecommendations()
+        Log.d("LOGGER_RetrofitAnimeNetworkImpl", "getRecentAnimeRecommendations: $response")
         return response
     }
 }

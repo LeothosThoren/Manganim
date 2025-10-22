@@ -22,7 +22,7 @@ internal interface AnimeNetworkModule {
     companion object {
         @Provides
         @BaseUrl
-        fun baseUrl(): String = "https://api.amvstr.me/"
+        fun baseUrl(): String = "https://api.jikan.moe/"
 
         @Provides
         fun animeApiService(retrofit: Retrofit): AnimeApiService {

@@ -9,10 +9,28 @@ import com.thoren.manganimu.core.network.models.anime.AnimeDetailResponse
 import com.thoren.manganimu.core.network.models.anime.AnimeEpisodeResponse
 import com.thoren.manganimu.core.network.models.anime.EpisodeResponse
 import com.thoren.manganimu.core.network.models.anime.PopularAnimeResponse
+import com.thoren.manganimu.core.network.models.anime.recommendations.DataResponse
+import com.thoren.manganimu.core.network.models.anime.recommendations.EntryResponse
 import com.thoren.manganimu.core.network.models.anime.stream.StreamResponse
 import com.thoren.manganimu.core.network.models.anime.stream.VideoStreamResponse
 import com.thoren.manganimu.core.network.models.failure.ApiCallFailure
 import com.thoren.manganimu.core.network.models.failure.HttpStatusCode
+import kotlinx.serialization.InternalSerializationApi
+
+@OptIn(InternalSerializationApi::class)
+internal fun DataResponse.toAnimeItems(): List<AnimeItem> =
+    entry.map { it.toAnimeItem() }
+
+internal fun EntryResponse.toAnimeItem(): AnimeItem =
+    AnimeItem(
+        id = malId,
+        title = title,
+        coverImage = AnimeItem.CoverImage(
+            medium = images.webp.smallImageUrl,
+            large = images.webp.largeImageUrl,
+            extraLarge = images.webp.largeImageUrl,
+        )
+    )
 
 internal fun PopularAnimeResponse.toAnimeItems(): List<AnimeItem> = results.map { it.toAnimeItem() }
 
