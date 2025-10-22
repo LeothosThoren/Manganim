@@ -3,10 +3,11 @@ package com.thoren.manganimu.core.ui.component
 import PreviewTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,39 +31,40 @@ fun BasicAnimeTile(
     modifier: Modifier = Modifier,
     onClick: (() -> Unit)? = null
 ) {
-    val minWidthInDp = 120.dp
-    val minHeightInDp = 180.dp
+    val tileWidth = 120.dp
+    val tileHeight = 240.dp
 
-    Box(
+    Column(
         modifier = modifier
-            .clickable { onClick?.invoke() }
-            .defaultMinSize(minWidth = minWidthInDp, minHeight = minHeightInDp)
-            .clip(shape = RoundedCornerShape(SpaceSize.small)),
-        contentAlignment = Alignment.BottomCenter,
+            .size(width = tileWidth, height = tileHeight)
+            .clip(shape = RoundedCornerShape(SpaceSize.small))
+            .clickable { onClick?.invoke() },
     ) {
         AsyncImage(
             modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
                 .clip(shape = RoundedCornerShape(SpaceSize.small)),
-            contentScale = ContentScale.FillBounds,
+            contentScale = ContentScale.Crop,
             model = imageUrl,
             contentDescription = null
         )
         Row(
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .matchParentSize()
-                .align(alignment = Alignment.BottomCenter)
-                .background(color = Color.Black.copy(alpha = 0.1f))
+                .fillMaxWidth()
+                .background(color = Color.Black.copy(alpha = 0.5f))
         ) {
             Text(
                 text = title,
                 color = Color.White,
                 textAlign = TextAlign.Center,
                 maxLines = 1,
-                style = typography.bodyMedium,
+                style = typography.bodyLarge,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier
-                    .align(alignment = Alignment.Bottom)
-                    .padding(horizontal = SpaceSize.tiny)
+                    .fillMaxWidth()
+                    .padding(horizontal = SpaceSize.tiny, vertical = SpaceSize.tiny)
             )
         }
     }

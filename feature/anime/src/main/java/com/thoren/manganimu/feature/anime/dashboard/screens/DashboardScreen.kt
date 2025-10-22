@@ -5,10 +5,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Scaffold
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -41,40 +40,41 @@ internal fun DashboardScreen(
     state: DashboardUiState,
     onClickItem: (Int) -> Unit
 ) {
-    Scaffold { innerPaddings ->
-        Box(
-            modifier = modifier.padding(innerPaddings),
-            contentAlignment = Alignment.Center
-        ) {
-            when (state) {
-                is DashboardUiState.Loading -> {
-                    Text(text = "Loading...")
-                }
+    Box(
+        modifier = modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        when (state) {
+            is DashboardUiState.Loading -> {
+                Text(text = "Loading...")
+            }
 
-                is DashboardUiState.Success -> {
-                    LazyColumn(
-                        verticalArrangement = Arrangement.spacedBy(SpaceSize.small),
-                        contentPadding = PaddingValues(SpaceSize.small)
-                    ) {
-                        items(items = state.popularAnime, key = { it.id }) { anime ->
-                            BasicAnimeTile(
-                                title = anime.title,
-                                imageUrl = anime.imageUrl,
-                                onClick = { onClickItem(anime.id) }
-                            )
-                        }
+            is DashboardUiState.Success -> {
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    verticalArrangement = Arrangement.spacedBy(SpaceSize.small),
+                    horizontalArrangement = Arrangement.spacedBy(SpaceSize.small),
+                    contentPadding = PaddingValues(SpaceSize.medium)
+                ) {
+                    items(state.popularAnime) { anime ->
+                        BasicAnimeTile(
+                            title = anime.title,
+                            imageUrl = anime.imageUrl,
+                            onClick = { onClickItem(anime.id) }
+                        )
                     }
                 }
+            }
 
-                is DashboardUiState.Error -> {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text(text = "Error: ${stringResource(state.message)}")
-                    }
+            is DashboardUiState.Error -> {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(text = "Error: ${stringResource(state.message)}")
                 }
             }
         }
     }
 }
+
 
 @Composable
 @PreviewLightDark
