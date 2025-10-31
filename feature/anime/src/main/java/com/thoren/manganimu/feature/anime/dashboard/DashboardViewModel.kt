@@ -8,7 +8,7 @@ import com.thoren.manganimu.core.models.AnimeFailure
 import com.thoren.manganimu.domain.anime.usecases.GetAnimeRecommendationsUseCase
 import com.thoren.manganimu.feature.anime.R
 import com.thoren.manganimu.feature.anime.dashboard.model.DashboardUiState
-import com.thoren.manganimu.feature.anime.dashboard.model.toPopularAnimeUiModel
+import com.thoren.manganimu.feature.anime.dashboard.model.toCoverAnimeUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -37,7 +37,7 @@ internal class DashboardViewModel @Inject constructor(
                 .onSuccess { animeList ->
                     _uiState.update { state ->
                         (state as DashboardUiState.Success).copy(popularAnime = animeList.map {
-                            it.toPopularAnimeUiModel()
+                            it.toCoverAnimeUiModel()
                         })
                     }
                 }.onFailure { failure ->

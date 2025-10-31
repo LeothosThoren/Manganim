@@ -8,7 +8,7 @@ data class PopularAnimeUiModel(
     val imageUrl: String?
 )
 
-fun AnimeItem.toPopularAnimeUiModel() = PopularAnimeUiModel(
+fun AnimeItem.toCoverAnimeUiModel() = PopularAnimeUiModel(
     id = id,
     title = title,
     imageUrl = coverImage.extraLarge
