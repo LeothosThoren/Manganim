@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.thoren.manganimu"
-        versionName = "0.1.1" // X.Y.Z; X = Major, Y = minor, Z = Patch level
+        versionName = "0.4.0" // X.Y.Z; X = Major, Y = minor, Z = Patch level
         versionCode = (System.currentTimeMillis() / 1000).toInt()
 
         vectorDrawables {
